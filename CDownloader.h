@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QUrl>
 #include <QNetworkAccessManager>
-
+#include <QNetworkReply>
 
 class CDownloader : public QObject
 {
@@ -16,19 +16,29 @@ public:
 
       void startRequest(const QUrl &requestedUrl);
 public slots:
-      void download(const QString& link);
+      void requestLink(const QString& link);
+      void downloadFile(const QUrl& link);
       void cancelDownload();
 
 private slots:    
       void onFinished();
+      void onDownloadFinished();
       void onReadyRead();
+      void onDownloaded();
 
+      void onError(QNetworkReply::NetworkError);
+      void onSslErrors(QList<QSslError> sslErrors);
+
+      bool saveAs(const QString &filename, QIODevice *data);
       void slotAuthenticationRequired(QNetworkReply*,QAuthenticator *);
 
 private:
+    QUrl getLinkForDownload(const QString& out);
+
     QUrl url;
     QNetworkAccessManager networkAccessMngr;
     QNetworkReply *reply;
+    QNetworkReply *replyDownload;
 
     bool httpRequestAborted;
 };

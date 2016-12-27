@@ -23,7 +23,7 @@ ApplicationWindow {
         id: teLink
         width: root.width/2
         height: 50
-        text: "http://www.youtube.com/watch?v=6DBi41reeF0"
+        text: "9azGzlvCygA"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
     }
@@ -35,7 +35,7 @@ ApplicationWindow {
         text: "Download It"
         onClicked: {
             console.debug("Going to download = " + teLink.text)
-            downloader.download(teLink.text)
+            downloader.requestLink(teLink.text)
         }
     }
 }
