@@ -39,6 +39,7 @@ private:
     QNetworkAccessManager networkAccessMngr;
     QNetworkReply *reply;
     QNetworkReply *replyDownload;
+    QByteArray replyString;
 
     bool httpRequestAborted;
 };
